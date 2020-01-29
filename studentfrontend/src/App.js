@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 // import logo from './logo.svg';
-import './App.css';
+// import './App.css';
 import axios from 'axios';
 // import PropTypes from 'prop-types';
 
@@ -72,7 +72,7 @@ class Input extends Component {
         lname:<input onChange={(event) => this.setState({ lastName: event.target.value })}></input>
         skill:<input onChange={(event) => this.setState({ skills: event.target.value })}></input>
         <button onClick={this.assignInput} >Add</button>
-        
+        <input></input>)
       </div>
     );
 
@@ -93,7 +93,23 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      students: [],
+      students: [
+        {
+          'firstName': 'Pramod',
+          'lastName': 'Ray',
+          'skills': ['Python', 'HTML', 'CSS']
+        },
+        {
+          'firstName': 'Sachin',
+          'lastName': 'Suresh',
+          'skills': ['Python', 'HTML', 'CSS', 'CAT']
+        },
+        {
+          'firstName': 'Samarth',
+          'lastName': 'Hegde',
+          'skills': ['Python', 'Git', 'CSS']
+        }
+      ],
       Searchname: ''
     }
     this.getList = this.getList.bind(this)
@@ -101,8 +117,6 @@ class App extends Component {
     this.sortlname = this.sortlname.bind(this)
     this.sortSkills = this.sortSkills.bind(this)
     this.SearchItem = this.SearchItem.bind(this)
-    this.postData=this.postData.bind(this)
-    this.ondelete=this.ondelete.bind(this)
 
   }
   getList(char) {
@@ -151,22 +165,6 @@ class App extends Component {
       Searchname: text
     })
   }
-  ondelete(id){
-    console.log('deleting done...')
-    axios.delete('http://127.0.0.1:8000/delete/'+id.toString()+'/')
-    .then(res=>{
-      console.log(res);
-      this.getData();
-    })
-  }
-  postData(students)
-  {
-    axios.post('http://127.0.0.1:8000/create/'.students)
-    .then(res => {
-      this.getData();
-    })
-  }
-  
   getData() {
     console.log('mounting now...');
     axios.get('http://127.0.0.1:8000/students/')
@@ -181,7 +179,7 @@ class App extends Component {
     this.getData();
   }
   // ondelete(){
-  //   Axios.delete('http://127.0.0.1:8000/'+pk+'/')
+  //s   Axios.delete('http://127.0.0.1:8000/'+pk+'/')
   // }
 
 
@@ -220,7 +218,6 @@ class App extends Component {
                      <ol>{x}</ol>
                    </ul>)
                   )}</td>
-                   <td> <button onClick={(event)=>{ this.ondelete(x.id)}}>delete</button></td>
                   </tr>
                   )
                   )
