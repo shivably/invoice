@@ -18,7 +18,7 @@ pytz==2019.3
 six==1.13.0
 sqlparse==0.3.0
 ```
-Installing
+## Installation
 
 Clone the repository
 ```
