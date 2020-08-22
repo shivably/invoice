@@ -1,6 +1,6 @@
-# Studentlist
+# Invoice
 
-Displaying the student records which includes first name, last name and skills. So here I have used django and ReactJs for the project.
+Sample billing application
 
 ## A full stack application was built using ReactJs and django. Used REST Api for communicating from backend to frontend.
 
@@ -22,7 +22,7 @@ sqlparse==0.3.0
 
 Clone the repository
 ```
-git clone https://github.com/rub9542/Studentlist.git
+git clone https://github.com/shivably/invoice.git
 ```
 Setting up your virtual environment:
 ```
@@ -34,7 +34,7 @@ source .env/bin/activate
 ```
 Once the repository is cloned and virtual environment set up, go to the directory where the requirements.txt(Studentlist/studentdb/) is and type the following code in your terminal:
 ```
-pip install requirements.txt
+pip3 install requirements.txt
 ```
 Then to run the server and type the following code in terminal:
 ```
