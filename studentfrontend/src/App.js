@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 // import logo from './logo.svg';
-// import './App.css';
+import './App.css';
 import axios from 'axios';
 // import PropTypes from 'prop-types';
 
@@ -51,9 +51,11 @@ class Input extends Component {
     this.assignInput = this.assignInput.bind(this)
   }
   assignInput() {
-    let skill = this.state.skills.split(',');
-    let skill1 = this.state;
-    skill1['skills'] = skill;
+    axios.post('http://127.0.0.1:8000/create/', this.state)
+    //let skill = this.state.skills.split(',');
+    //let skill1 = this.state;
+    //skill1['skills'] = skill;
+    
     this.props.dataSet(this.state);
     this.setState({
       firstName: '',
@@ -67,13 +69,21 @@ class Input extends Component {
 
   render() {
     return (
-      <div>
-        fname: <input onChange={(event) => this.setState({ firstName: event.target.value })}></input>
-        lname:<input onChange={(event) => this.setState({ lastName: event.target.value })}></input>
-        skill:<input onChange={(event) => this.setState({ skills: event.target.value })}></input>
-        <button onClick={this.assignInput} >Add</button>
-        <input></input>)
+<form>
+      <div class="form-row">
+      <div class="col">
+        First Name: <input class="form-control" onChange={(event) => this.setState({ firstName: event.target.value })}></input>
+        </div>
+        <div class="col">
+        Last Name:<input class="form-control" onChange={(event) => this.setState({ lastName: event.target.value })}></input>
+        </div>
+        <div class="col">
+        Skills:<input class="form-control" onChange={(event) => this.setState({ skills: event.target.value })}></input>
+        </div>
+        <button class="btn btn-primary" onClick={this.assignInput} >Add</button>
       </div>
+
+      </form>
     );
 
   }
@@ -81,8 +91,10 @@ class Input extends Component {
 class Search extends Component {
   render() {
     return (
-      <div>
-        <input onChange={(event) => this.props.searchInfo(event.target.value)}></input>
+      <div class="form-row">
+        <div class="col">
+        <input placeholder="Search" class="form-control" onChange={(event) => this.props.searchInfo(event.target.value)}></input>
+      </div>
       </div>
     )
   }
@@ -183,6 +195,10 @@ class App extends Component {
   // }
 
 
+  /*render(){
+    return(<div>Hello!</div>)
+  };*/
+
   render() {
     return (
 
@@ -192,23 +208,23 @@ class App extends Component {
         <Search searchInfo={this.SearchItem} />
         <div className='list1' >
 
-          <table>
+          <table class="table table-striped"> 
             <thead>
               <tr>
-                <th onClick={this.sortfname}>Firstname</th>
-                <th onClick={this.sortlname}>Lastname</th>
-                <th onClick={this.sortSkills}>skills</th>
+                <th scope="col" onClick={this.sortfname}>Firstname</th>
+                <th scope="col" onClick={this.sortlname}>Lastname</th>
+                <th scope="col" onClick={this.sortSkills}>skills</th>
               </tr>
             </thead>
             <tbody>
-              {/* {this.state.students } */}
+    {/* {this.state.students */} 
               { this.state.students.filter(name => {
 
                 return name.firstName.toLowerCase().includes(
                   this.state.Searchname.toLowerCase()) ||
                   name.lastName.toLowerCase().includes(this.state.Searchname.toLowerCase());
                 }).map((x, index) => (
-                  <tr key={index}>
+                  <tr scope="row" key={index}>
 
 
                   <td>{x.firstName} </td>
@@ -225,9 +241,6 @@ class App extends Component {
               </tbody>
           </table> 
         </div>
-
-
-    
       </div>
     );
   }
